@@ -1,10 +1,9 @@
-import 'package:chat/pages/register_page.dart';
 import 'package:chat/widgets/custom_button.dart';
 import 'package:chat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Login',
+                  'Register',
                   style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
               ],
@@ -40,33 +39,17 @@ class LoginPage extends StatelessWidget {
             CustomTextField(hintText: 'Password'),
             const SizedBox(height: 10),
 
-            CustomButton(title: 'Login',),
+            CustomButton(title: 'Register'),
             const SizedBox(height: 20),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'don\'t have an acount ?',
+                  'you have an acount already ?',
                   style: TextStyle(color: Colors.white),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return RegisterPage();
-                          
-                        },
-                      ),
-                    );
-                  },
-                  child: Text(
-                    '  Register',
-                    style: TextStyle(color: Color(0xffc7ede6)),
-                  ),
-                ),
+                Text('  Login', style: TextStyle(color: Color(0xffc7ede6))),
               ],
             ),
             Spacer(flex: 3),
