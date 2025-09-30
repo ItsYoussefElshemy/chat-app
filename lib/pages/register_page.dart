@@ -1,26 +1,32 @@
+import 'package:chat/constance.dart';
 import 'package:chat/widgets/custom_button.dart';
 import 'package:chat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
 
+  static String id = 'RegisterPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff2B475E),
+      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
-            Spacer(flex: 2),
-            Image.asset('assets/scholar.png'),
-            Text(
-              'Chat App',
-              style: TextStyle(fontSize: 32, color: Colors.white),
+            SizedBox(height: 75),
+            Image.asset('assets/scholar.png', height: 100),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Chat App',
+                  style: TextStyle(fontSize: 32, color: Colors.white),
+                ),
+              ],
             ),
-            Spacer(flex: 2),
+            SizedBox(height: 75),
 
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,10 +55,17 @@ class RegisterPage extends StatelessWidget {
                   'you have an acount already ?',
                   style: TextStyle(color: Colors.white),
                 ),
-                Text('  Login', style: TextStyle(color: Color(0xffc7ede6))),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    '  Login',
+                    style: TextStyle(color: Color(0xffc7ede6)),
+                  ),
+                ),
               ],
             ),
-            Spacer(flex: 3),
           ],
         ),
       ),

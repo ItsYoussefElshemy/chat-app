@@ -1,3 +1,4 @@
+import 'package:chat/constance.dart';
 import 'package:chat/pages/register_page.dart';
 import 'package:chat/widgets/custom_button.dart';
 import 'package:chat/widgets/custom_text_field.dart';
@@ -9,19 +10,24 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff2B475E),
+      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
-            Spacer(flex: 2),
-            Image.asset('assets/scholar.png'),
-            Text(
-              'Chat App',
-              style: TextStyle(fontSize: 32, color: Colors.white),
+            SizedBox(height: 75),
+
+            Image.asset('assets/scholar.png', height: 100),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Chat App',
+                  style: TextStyle(fontSize: 32, color: Colors.white),
+                ),
+              ],
             ),
-            Spacer(flex: 2),
+            SizedBox(height: 75),
 
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +46,7 @@ class LoginPage extends StatelessWidget {
             CustomTextField(hintText: 'Password'),
             const SizedBox(height: 10),
 
-            CustomButton(title: 'Login',),
+            CustomButton(title: 'Login'),
             const SizedBox(height: 20),
 
             Row(
@@ -52,15 +58,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return RegisterPage();
-                          
-                        },
-                      ),
-                    );
+                    Navigator.pushNamed(context, RegisterPage.id);
                   },
                   child: Text(
                     '  Register',
@@ -69,7 +67,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            Spacer(flex: 3),
           ],
         ),
       ),
