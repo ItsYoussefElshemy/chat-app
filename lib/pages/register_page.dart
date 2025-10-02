@@ -1,12 +1,15 @@
 import 'package:chat/constance.dart';
 import 'package:chat/widgets/custom_button.dart';
 import 'package:chat/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
   static String id = 'RegisterPage';
+  String? email;
+  String? password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +42,48 @@ class RegisterPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            CustomTextField(hintText: 'Email'),
+            CustomTextField(
+              onChange: (data) {
+                email = data;
+              },
+              hintText: 'Email',
+            ),
             const SizedBox(height: 10),
 
-            CustomTextField(hintText: 'Password'),
+            CustomTextField(
+              onChange: (data) {
+                password = data;
+              },
+              hintText: 'Password',
+            ),
             const SizedBox(height: 10),
 
-            CustomButton(title: 'Register'),
+            CustomButton(
+              ontap: () async {
+                try {
+                  UserCredential user = await FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                        email: email!,
+                        password: password!,
+                      );
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'weak-password') {
+                    ScaffoldMessenger.of(
+                      context).showSnackBar(SnackBar(content: Text('weak password'),),);
+                  } else if (e.code == 'email-already-in-use') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('email already exists'),),
+                    );
+                  }
+                }
+
+                 ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('email created successfully '),),
+                    );
+
+              },
+              title: 'Register',
+            ),
             const SizedBox(height: 20),
 
             Row(
