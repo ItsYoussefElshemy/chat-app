@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 Text(
                   'Login',
                   style: TextStyle(fontSize: 24, color: Colors.white),
-                ),
+                 ),
               ],
             ),
             const SizedBox(height: 20),
