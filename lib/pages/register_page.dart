@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../helper/show_snack_bar.dart';
+
 class RegisterPage extends StatefulWidget {
   RegisterPage({super.key});
 
@@ -59,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
 
-                CustomTextField(
+                CustomFormTextField(
                   onChange: (data) {
                     email = data;
                   },
@@ -67,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 10),
 
-                CustomTextField(
+                CustomFormTextField(
                   onChange: (data) {
                     password = data;
                   },
@@ -85,9 +87,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         showSnackBar(context, 'success');
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
-                          showSnackBar(context, 'weak-password');
+                          showSnackBar(context, 'weak password');
                         } else if (e.code == 'email-already-in-use') {
-                          showSnackBar(context, 'email-already-in-use');
+                          showSnackBar(context, 'email already in use');
                         }
                       } catch (e) {
                         showSnackBar(context, 'There was an error');
@@ -123,12 +125,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
-  }
-
-  void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   Future<void> registerUser() async {
