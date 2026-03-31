@@ -20,7 +20,7 @@ class ChatBubble extends StatelessWidget {
           ),
         ),
         child: Text(
-          'hahahahahhahahahahh;sdlvkms;dv',
+          'hahahahahharetsvb',
           style: TextStyle(color: Colors.white),
         ),
       ),

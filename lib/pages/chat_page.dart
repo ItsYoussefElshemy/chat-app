@@ -10,50 +10,59 @@ class ChatPage extends StatelessWidget {
   );
 
   TextEditingController controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: kPrimaryColor,
-        title: Text('Chat', style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-      ),
+    return FutureBuilder<QuerySnapshot>(
+      future: messages.get(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          print(snapshot.data!.docs[1]['message']);
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: kPrimaryColor,
+              title: Text('Chat', style: TextStyle(color: Colors.white)),
+              centerTitle: true,
+            ),
 
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return ChatBubble();
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              controller: controller,
-              onSubmitted: (data) {
-                messages.add({'message': data});
-                controller.clear();
-              },
-              decoration: InputDecoration(
-                hintText: 'Send Message',
-                suffixIcon: Icon(Icons.send, color: kPrimaryColor),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(color: kPrimaryColor),
+            body: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ChatBubble();
+                    },
+                  ),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide(color: kPrimaryColor),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: TextField(
+                    controller: controller,
+                    onSubmitted: (data) {
+                      messages.add({'message': data});
+                      controller.clear();
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Send Message',
+                      suffixIcon: Icon(Icons.send, color: kPrimaryColor),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide(color: kPrimaryColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide(color: kPrimaryColor),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        } else {
+          return Text('loading...');
+        }
+      },
     );
   }
 }
