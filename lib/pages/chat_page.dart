@@ -13,8 +13,8 @@ class ChatPage extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: messages.get(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: messages.orderBy(kCreatedAt).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Message> messagesList = [];
@@ -44,7 +44,10 @@ class ChatPage extends StatelessWidget {
                   child: TextField(
                     controller: controller,
                     onSubmitted: (data) {
-                      messages.add({'message': data});
+                      messages.add({
+                        'message': data,
+                        kCreatedAt: DateTime.now(),
+                      });
                       controller.clear();
                     },
                     decoration: InputDecoration(
