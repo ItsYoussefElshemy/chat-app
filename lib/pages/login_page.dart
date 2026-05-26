@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 SizedBox(height: 75),
 
-                Image.asset('assets/scholar.png', height: 100),
+                Image.asset('assets/chat.png', height: 100),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

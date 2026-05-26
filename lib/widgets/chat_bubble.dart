@@ -37,7 +37,7 @@ class ChatBubbleForFriend extends StatelessWidget {
         padding: EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 16),
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: Color(0xff006d84),
+          color: Color(0xff128c7e),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(26),
             topRight: Radius.circular(26),
